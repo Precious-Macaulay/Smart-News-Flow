@@ -1,12 +1,12 @@
 const { keywordsGenerator } = require('./langchainController');
-const { newsService } = require('../services/newsService');
-const eventEmitter = require('../events/eventEmitter');
+const { getNewsArticles } = require('../services/newsService');
+const { eventEmitter } = require('../events/eventEmitter');
 
 exports.search = async (req, res) => {
     const { email, prompt } = req.body;
     const user_id = email;
-    const keywords = await keywordsGenerator(prompt).join(' ');
-    const articles = await newsService(keywords);
+    const keywords = await keywordsGenerator(prompt);
+    const articles = await getNewsArticles(keywords.join(' '));
 
     articles.forEach(article => {
         const payload = {
@@ -24,5 +24,5 @@ exports.search = async (req, res) => {
         };
         eventEmitter.emit('data-event', JSON.stringify(payload));
     });
-    res.send('Data routed to stream', 200);
+    res.status(200).send('Data routed to stream');
 };

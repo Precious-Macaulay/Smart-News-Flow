@@ -5,7 +5,7 @@ const NewsFlow = ({ onNavigate, data }) => {
 
 
   useEffect(() => {
-    const socket = new WebSocket(`${process.env[WS_BASE_URL]}?userId=${email}&prompt=${prompt}`);
+    const socket = new WebSocket(`${import.meta.env.VITE_WS_BASE_URL}?userId=${email}&prompt=${prompt}`);
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
       console.log('Data received from server:', data);

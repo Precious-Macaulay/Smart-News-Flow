@@ -64,7 +64,8 @@ services:
             println!("request body: {}", body);
 
             // Build the request
-            let request_url = "https://glowing-space-acorn-wj9gp9j9qprc99vx.github.dev/refine";
+            let base_url = std::env::var("API_BASE_URL")?;
+            let request_url = format!("{}/refine", base_url);
             let request = sdf_http::http::Request::builder()
                 .uri(request_url)
                 .method("POST")
@@ -76,6 +77,10 @@ services:
             let body_bytes: Vec<u8> = response.into_body();
             let body_string = String::from_utf8(body_bytes)?;
             println!("output: {}", body_string);
+
+            if body_string == "Internal Server Error" {
+                return Ok(None);
+            }
 
             // Extract and check the 'relevant' field
             let relevant: Option<bool> = serde_json::from_str(&body_string).ok()

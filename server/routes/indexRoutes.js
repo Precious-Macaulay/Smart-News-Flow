@@ -18,13 +18,23 @@ router.get('/stream', streamData);
 
 router.post('/refine', async (req, res) => {
   const { prompt, content } = req.body;
+  let attempt = 0;
+const maxRetries = 3;
+let success = false;
+
+while (attempt < maxRetries && !success) {
   try {
     const relevance = await checkRelevance(prompt, content);
     res.json(relevance);
+    success = true; // Exit loop if successful
   } catch (error) {
-    console.error('Error checking relevance:', error);
-    res.status(500).send('Internal Server Error');
+    attempt++;
+    console.error(`Attempt ${attempt} - Error checking relevance:`, error);
+    if (attempt >= maxRetries) {
+      res.status(500).send('Internal Server Error');
+    }
   }
+}
 });
 
 module.exports = router;

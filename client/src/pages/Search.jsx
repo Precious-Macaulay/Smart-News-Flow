@@ -10,14 +10,12 @@ const Search = ({ onNavigate, data, onPrompt, promptList }) => {
         setPrompt(e.target.value);
     };
 
-    console.log('Base URL:', process.env[API_BASE_URL]);
-
     const handleSubmit = async () => {
         if (prompt.trim() !== '') {
             setIsLoading(true);
             try {
                 // Send request to the server
-                const response = await fetch(`${process.env[API_BASE_URL]}/search`, {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/search`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -65,6 +63,7 @@ const Search = ({ onNavigate, data, onPrompt, promptList }) => {
                     placeholder="Enter your search query..."
                     value={prompt}
                     onChange={handleChange}
+                    autoComplete='on'
                     onKeyDown={handleKeyPress}
                 />
                 {prompt.trim() === '' && <p className="error">Prompt cannot be empty</p>}

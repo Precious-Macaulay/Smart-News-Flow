@@ -6,6 +6,16 @@ meta:
   topic: ai-refined-news
   secrets:
     - name: SINK_DATA_URL
+  consumer:
+    id: my-http-sink
+    offset:
+      strategy: auto
 http:
   endpoint: "${{ secrets.SINK_DATA_URL }}"
-  interval: 10s
+  interval: 5s
+  headers:
+    - "Content-Type: application/json"
+transforms:
+  - uses: infinyon/regex-filter@0.2.0
+    with:
+      regex: '"tweet":".*\\"relevant\\":true.*"'

@@ -11,7 +11,7 @@ http:
   method: GET
   stream: true
   delimiter: "\n\n"
-transforms:
-  - uses: infinyon/regex-filter@0.2.0
-    with:
-      regex: "^(?!.*\bnull\b).+$"
+# transforms:
+#   - uses: infinyon/regex-filter@0.2.0
+#     with:
+#       regex: "^(?!.*null).+$"

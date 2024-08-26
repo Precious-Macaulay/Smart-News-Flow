@@ -51,6 +51,8 @@ services:
                 .ok_or("Missing content")?.as_str().ok_or("Invalid content format")?;
             let url = raw_json.get("article")
                 .and_then(|a| a.get("url")).ok_or("Missing url")?.as_str().ok_or("Invalid url format")?;
+            let image = raw_json.get("article")
+                .and_then(|a| a.get("url_to_image")).ok_or("Missing image")?.as_str().ok_or("Invalid image format")?;
 
             // Build the refined JSON data
             let refined_data = serde_json::json!({
@@ -91,10 +93,11 @@ services:
 
             // Create the result object and convert it to a JSON string
             let result = serde_json::json!({
-                "tweet": body_string,
+                "news": body_string,
                 "user_id": user_id,
                 "prompt": prompt,
-                "url": url
+                "url": url,
+                "image": image
             });
 
             if relevant != Some(false) {

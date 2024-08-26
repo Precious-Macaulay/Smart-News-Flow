@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 
-const Search = ({ onNavigate, data, onPrompt, promptList }) => {
+const Search = ({ onNavigate, data, onPrompt, promptHistoryData }) => {
     const { email } = data;
     const [prompt, setPrompt] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +14,6 @@ const Search = ({ onNavigate, data, onPrompt, promptList }) => {
         if (prompt.trim() !== '') {
             setIsLoading(true);
             try {
-                // Send request to the server
                 const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/search`, {
                     method: 'POST',
                     headers: {
@@ -23,10 +22,8 @@ const Search = ({ onNavigate, data, onPrompt, promptList }) => {
                     body: JSON.stringify({ email, prompt }),
                 });
 
-                console.log('Response:', response);
-
                 if (response.ok) {
-                    onPrompt(prompt);
+                    onPrompt({ email, prompt });
                     onNavigate('newsflow', { email, prompt });
                 } else {
                     console.error('Server responded with an error');
@@ -49,6 +46,11 @@ const Search = ({ onNavigate, data, onPrompt, promptList }) => {
         onNavigate('login');
         return null;
     }
+
+    const handleSelectedPrompt = (index) => () => {
+        const promptData = promptHistoryData[index];
+        onNavigate('newsflow', promptData);
+    };
 
     return (
         <>
@@ -74,9 +76,9 @@ const Search = ({ onNavigate, data, onPrompt, promptList }) => {
             </div>
             <div>
                 <h2>Recent Prompts</h2>
-                {promptList.map((prompt, index) => (
-                    <div key={index} className="prompt">
-                        {prompt}
+                {promptHistoryData.map((promptData, index) => (
+                    <div onClick={handleSelectedPrompt(index)} style={{ cursor: 'pointer' }} key={index} className="prompt">
+                        {promptData.prompt}
                     </div>
                 ))}
             </div>

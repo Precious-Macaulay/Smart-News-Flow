@@ -15,7 +15,3 @@ http:
   interval: 5s
   headers:
     - "Content-Type: application/json"
-transforms:
-  - uses: infinyon/regex-filter@0.2.0
-    with:
-      regex: '"tweet":".*\\"relevant\\":true.*"'

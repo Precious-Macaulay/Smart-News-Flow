@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 
-const Search = ({ onNavigate, data, onPrompt, promptHistoryData }) => {
+const Search = ({ onNavigate, data, promptHistoryData }) => {
     const { email } = data;
     const [prompt, setPrompt] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +23,6 @@ const Search = ({ onNavigate, data, onPrompt, promptHistoryData }) => {
                 });
 
                 if (response.ok) {
-                    onPrompt({ email, prompt });
                     onNavigate('newsflow', { email, prompt });
                 } else {
                     console.error('Server responded with an error');

@@ -3,12 +3,6 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
-# Function to update and upgrade the system
-system_update_upgrade() {
-    echo "Updating and upgrading the system..."
-    sudo apt update && sudo apt upgrade -y
-}
-
 # Function to install build-essential and other dependencies
 install_dependencies() {
     echo "Installing build-essential and other dependencies..."
@@ -27,11 +21,6 @@ source_rust_env() {
     . "$HOME/.cargo/env"
 }
 
-# Function to add the wasm32-wasi target
-add_wasi_target() {
-    echo "Adding wasm32-wasi target..."
-    rustup target add wasm32-wasi
-}
 
 # Function to add the wasm32-wasip1 target
 add_wasip1_target() {
@@ -46,8 +35,6 @@ verify_installation() {
     rustup target list --installed
 }
 
-# Start by updating and upgrading the system
-system_update_upgrade
 
 # Install necessary dependencies
 install_dependencies
@@ -61,9 +48,6 @@ else
     echo "Rust is already installed."
     source_rust_env
 fi
-
-# Add wasm32-wasi target
-add_wasi_target
 
 # Add wasm32-wasip1 target
 add_wasip1_target

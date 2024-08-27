@@ -23,7 +23,7 @@ const NewsFlow = ({ onNavigate, data }) => {
     }, [email, prompt]);
 
     const handleBack = () => {
-        onNavigate('search', { email, prompt, news });
+        onNavigate('search', { email, prompt, news } , "back");
     };
 
     return (

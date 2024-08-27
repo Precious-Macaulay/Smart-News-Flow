@@ -79,10 +79,11 @@ check_continue
 # Start Stateful Data Flow
 print_message "Starting Stateful Data Flow..."
 cd ../
-sdf run --ui --ephemeral
+sdf run --ui --
 check_continue
 
 # Mark setup as complete
 touch "$FLAG_FILE"
 
 print_message "Data pipeline setup complete and ready to receive data."
+ephemeral

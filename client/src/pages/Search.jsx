@@ -49,7 +49,7 @@ const Search = ({ onNavigate, data, onPrompt, promptHistoryData }) => {
 
     const handleSelectedPrompt = (index) => () => {
         const promptData = promptHistoryData[index];
-        onNavigate('newsflow', promptData);
+        onNavigate('newsflow', promptData, index);
     };
 
     return (

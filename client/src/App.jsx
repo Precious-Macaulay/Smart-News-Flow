@@ -7,13 +7,13 @@ function App() {
     const [data, setData] = useState({});
     const [promptHistoryData, setPromptHistoryData] = useState([]);
 
-    const handleNavigate = (page, newData) => {
+    const handleNavigate = (page, newData, index) => {
         setPage(page);
         setData((prevData) => ({ ...prevData, ...newData }));
+        setPromptHistoryData((prevPromptHistory) => [...prevPromptHistory, promptData]);
     };
 
     const handlePromptData = (promptData) => {
-        setPromptHistoryData((prevPromptHistory) => [...prevPromptHistory, promptData]);
     };
 
     return (

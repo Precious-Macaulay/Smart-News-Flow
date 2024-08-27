@@ -41,12 +41,10 @@ export default function NewsDisplay({ newsData }) {
         restDelta: 0.001
     });
 
-    console.log(newsData);
-
     return (
         <>
             {newsData?.map((e) => (
-                <NewsCard data={e} />
+                <NewsCard key={e} data={e} />
             ))}
             <motion.div className="progress" style={{ scaleX }} />
         </>

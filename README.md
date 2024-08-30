@@ -1,6 +1,6 @@
 # **Smart News Flow**
 
-**Smart News Flow** is an innovative platform designed for the **Infinyon Quest**, utilizing **Fluvio's real-time data streaming** capabilities combined with **Groq's fast inference large language models (LLMs)** to enhance and refine news content sourced from **NewsAPI**.
+**Smart News Flow** is an innovative platform designed for the **Infinyon Quest**, utilizing **Fluvio's real-time data streaming** capabilities combined with **Groq's fast inference large language models (LLMs)** to deliver an enhance and refine historical and realtime news content from various source(currently only supports NewsAPI).
 
 ## **Table of Contents**
 - [**Smart News Flow**](#smart-news-flow)
@@ -19,7 +19,6 @@
       - [**Server**](#server)
       - [**Client**](#client)
       - [**Fluvio Secret Files**](#fluvio-secret-files)
-    - [**Example Values**](#example-values)
   - [**Architecture**](#architecture)
     - [**System Overview**](#system-overview)
   - [**Contributing**](#contributing)
@@ -34,9 +33,11 @@
 Before getting started, ensure you have the following installed on your machine:
 
 - **Node.js >= 16.x**: A JavaScript runtime required for running the server and client. [Download Node.js](https://nodejs.org/).
-- **Rust >= 1.80**: A systems programming language needed for building certain parts of the project. [Install Rust](https://www.rust-lang.org/learn/get-started).
-- **Cargo >= 1.80**: Rust's package manager used for handling dependencies. Cargo is installed alongside Rust.
-- **Wasm32-Wasip1**: A WebAssembly target for Rust, required for building WebAssembly modules. [More on Wasm32-Wasip1](https://rustwasm.github.io/).
+- **Rust >= 1.80**: A systems programming language needed for building certain parts of the project. [Install Rust](https://forge.rust-lang.org/infra/other-installation-methods.html).
+- **Wasm32-Wasip1**: A WebAssembly target for Rust, required for building WebAssembly modules. 
+``` bash
+rustup target add wasm32-wasip1
+```
 - **Groq API Key**: An API key needed to access Groq's LLM services. [Sign up for Groq](https://groq.com).
 - **NewsAPI Key**: An API key needed to fetch news data from NewsAPI. [Get an API key](https://newsapi.org).
 
@@ -90,10 +91,11 @@ Before getting started, ensure you have the following installed on your machine:
 2. **Build and start the Fluvio data pipeline**:
    ```bash
    cd fluvio-pipeline
-   setup.sh
+   ./setup.sh
    ```
-   - If successful, start the Fluvio stateful data flow:
+   - If successful, start the Fluvio stateful data flow and ensure you replace with the server URL:
    ```bash
+   source ~/.bashrc
    sdf run --ui --ephemeral -e API_BASE_URL=https://localhost:3000
    ```
 
@@ -123,16 +125,6 @@ Before getting started, ensure you have the following installed on your machine:
 #### **Fluvio Secret Files**
 - **`secret.txt`**: Example configuration file for Fluvio.
 
-### **Example Values**
-```env
-# Server
-GROQ_API_KEY=your-groq-api-key
-NEWS_API_KEY=your-newsapi-key
-
-# Client
-VITE_API_BASE_URL=http://localhost:3000
-VITE_WS_BASE_URL=wss://localhost:3000
-```
 
 ## **Architecture**
 

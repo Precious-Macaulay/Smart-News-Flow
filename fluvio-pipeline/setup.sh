@@ -42,7 +42,7 @@ fi
 
 # Install SDF Beta 1 CLI
 print_message "Installing SDF Beta 1 CLI..."
-fvm install sdf-beta1
+fvm install sdf-beta1.1
 check_continue
 
 # Start Fluvio
@@ -76,14 +76,7 @@ print_message "Setting up SDF..."
 sdf setup
 check_continue
 
-# Start Stateful Data Flow
-print_message "Starting Stateful Data Flow..."
-cd ../
-sdf run --ui --
-check_continue
-
 # Mark setup as complete
 touch "$FLAG_FILE"
 
 print_message "Data pipeline setup complete and ready to receive data."
-ephemeral

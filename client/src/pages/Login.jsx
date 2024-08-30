@@ -27,7 +27,7 @@ function Login({ onNavigate }) {
             <h1>Smart News Flow</h1>
 
             <p className="read-the-docs">
-                Experience real-time latest news in a smart way from multiple sources.
+                Experience Historical and real-time news in a smart way from multiple sources.
             </p>
             <div className="card">
                 <input type="email" placeholder="example@gmail.com" value={email} onChange={handleChange} autoComplete="on" />

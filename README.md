@@ -102,7 +102,7 @@ rustup target add wasm32-wasip1
 ### **Demo**
 - **Fetching and Refining News Content**:
   - Access the client at `https://localhost:5173`, sign in, and search for news around the world. Watch the demo video below for more information.
-  - **[Link to Demo Video]**: [Placeholder - Add the link to the demo video here]
+  - **[Link to Demo Video]**: [https://youtu.be/aCNeAj_-5MY]
 
 
 ## **Features**

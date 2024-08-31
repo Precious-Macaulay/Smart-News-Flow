@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
 const { loadLocalStorage } = require('../helpers/storage');
 
-const users = {}
+const users = {};
 
 module.exports = (server) => {
   const wss = new WebSocket.Server({ server });

@@ -11,5 +11,3 @@ http:
   method: GET
   stream: true
   delimiter: "\n\n"
-transforms:
-  - uses: macaulay/json-validator@0.1.0

@@ -63,7 +63,6 @@ rustup target add wasm32-wasip1
    ```bash
    npm run dev
    ```
-   client will be available at  `https://localhost:5173`
 
 ## **Usage**
 
@@ -92,16 +91,12 @@ rustup target add wasm32-wasip1
 2. **Build and start the Fluvio data pipeline**:
    ```bash
    cd fluvio-pipeline
-   chmod +x setup.sh
    ./setup.sh
    ```
-   - If successful, start the Fluvio stateful data flow change the variable if yours is different:
-   - if Rust and Wasm32-Wasip1 requirement are not satisfied
-   for rust run   `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
-    for Wasm32-Wasip1 run `rustup target add wasm32-wasip1`
+   - If successful, start the Fluvio stateful data flow and ensure you replace with the server URL:
    ```bash
    source ~/.bashrc
-   sdf run --ui --ephemeral -e API_BASE_URL=REPLACE_WITH_YOUR_SERVER_URL
+   sdf run --ui --ephemeral -e API_BASE_URL=https://localhost:3000
    ```
 
 ### **Demo**
@@ -128,8 +123,8 @@ rustup target add wasm32-wasip1
 - `VITE_WS_BASE_URL`: WebSocket URL (e.g., `wss://localhost:3000`).
 
 #### **Fluvio Secret Files**
-
 - **`secret.txt`**: Example configuration file for Fluvio.
+
 
 ## **Architecture**
 
@@ -171,6 +166,7 @@ We welcome contributions! Please follow these steps:
    git push origin feature/your-feature-name
    ```
 6. **Submit a pull request**: Go to the original repository and open a pull request.
+
 
 ### **Code Style Guidelines**
 - Follow the [ESLint](https://eslint.org/) rules for JavaScript/TypeScript.

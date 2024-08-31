@@ -1,33 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Login, Search, NewsFlow } from './pages';
 import './App.css';
 
 function App() {
-    // Retrieve initial states from local storage or use default values
-    const [page, setPage] = useState(() => localStorage.getItem('page') || 'login');
-    const [data, setData] = useState(() => JSON.parse(localStorage.getItem('data')) || {});
-    const [promptHistoryData, setPromptHistoryData] = useState(() => JSON.parse(localStorage.getItem('promptHistoryData')) || []);
-
-    // Update local storage whenever the state changes
-    useEffect(() => {
-        localStorage.setItem('page', page);
-    }, [page]);
-
-    useEffect(() => {
-        localStorage.setItem('data', JSON.stringify(data));
-    }, [data]);
-
-    useEffect(() => {
-        localStorage.setItem('promptHistoryData', JSON.stringify(promptHistoryData));
-    }, [promptHistoryData]);
+    const [page, setPage] = useState('login');
+    const [data, setData] = useState({});
+    const [promptHistoryData, setPromptHistoryData] = useState([]);
 
     const handleNavigate = (page, newData, index) => {
         setPage(page);
         setData(newData);
-        if (index === 'back') {
-            setPromptHistoryData((prevPromptHistory) => ([...prevPromptHistory, newData]));
-        }
-        if (index !== undefined && index !== 'back') {
+        index == "back" && setPromptHistoryData((prevPromptHistory) => ([...prevPromptHistory, newData]))
+        if (index !== undefined) {
             setPromptHistoryData((prevPromptHistory) => {
                 return prevPromptHistory.filter((_, i) => i !== index);
             });

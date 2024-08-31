@@ -33,7 +33,7 @@ const NewsFlow = ({ onNavigate, data }) => {
                     <h2>Smart News Flow</h2>
                     <button onClick={handleBack}>Back to Search</button>
                 </div>
-                <h2>{prompt?.slice(0, 40)}...?</h2>
+                <h2>{prompt}?</h2>
             </div>
             <NewsDisplay newsData={news} />
         </div>

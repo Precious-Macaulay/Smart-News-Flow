@@ -7,7 +7,6 @@ CDK_HUB="cdk hub download"
 FLUVIO_HUB="fluvio hub sm download"
 FLAG_FILE=".setup_complete"
 BASHRC_FILE="$HOME/.bashrc"
-SMARTMODULE_DIR=../smart-modules/json-validator
 
 # Function to print messages
 function print_message {
@@ -64,12 +63,9 @@ $CDK_HUB infinyon/http-sink@0.2.10
 check_continue
 $FLUVIO_HUB infinyon/regex-filter@0.2.0
 check_continue
-pwd
-cd "$SMARTMODULE_DIR" && smdk load
 
 # Deploy connectors
 print_message "Deploying connectors..."
-cd ../../connectors
 cdk deploy start --ipkg infinyon-http-source-0.3.8.ipkg -c inbound.yaml --secrets secrets.txt
 check_continue
 cdk deploy start --ipkg infinyon-http-sink-0.2.10.ipkg -c outbound.yaml --secrets secrets.txt

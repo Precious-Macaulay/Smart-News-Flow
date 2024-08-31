@@ -15,3 +15,5 @@ http:
   interval: 5s
   headers:
     - "Content-Type: application/json"
+transforms:
+  - uses: macaulay/json-validator@0.1.0

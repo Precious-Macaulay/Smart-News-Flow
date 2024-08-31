@@ -7,6 +7,7 @@ CDK_HUB="cdk hub download"
 FLUVIO_HUB="fluvio hub sm download"
 FLAG_FILE=".setup_complete"
 BASHRC_FILE="$HOME/.bashrc"
+SMARTMODULE_DIR=../smart-modules/json-validator
 
 # Function to print messages
 function print_message {
@@ -42,7 +43,7 @@ fi
 
 # Install SDF Beta 1 CLI
 print_message "Installing SDF Beta 1 CLI..."
-fvm install sdf-beta1
+fvm install sdf-beta1.1
 check_continue
 
 # Start Fluvio
@@ -63,9 +64,12 @@ $CDK_HUB infinyon/http-sink@0.2.10
 check_continue
 $FLUVIO_HUB infinyon/regex-filter@0.2.0
 check_continue
+pwd
+cd "$SMARTMODULE_DIR" && smdk load
 
 # Deploy connectors
 print_message "Deploying connectors..."
+cd ../../connectors
 cdk deploy start --ipkg infinyon-http-source-0.3.8.ipkg -c inbound.yaml --secrets secrets.txt
 check_continue
 cdk deploy start --ipkg infinyon-http-sink-0.2.10.ipkg -c outbound.yaml --secrets secrets.txt
@@ -76,14 +80,8 @@ print_message "Setting up SDF..."
 sdf setup
 check_continue
 
-# Start Stateful Data Flow
-print_message "Starting Stateful Data Flow..."
-cd ../
-sdf run --ui --
-check_continue
 
 # Mark setup as complete
 touch "$FLAG_FILE"
 
 print_message "Data pipeline setup complete and ready to receive data."
-ephemeral

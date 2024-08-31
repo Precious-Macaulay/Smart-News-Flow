@@ -71,12 +71,13 @@ const Search = ({ onNavigate, data, promptHistoryData }) => {
                 <button onClick={handleSubmit} disabled={isLoading}>
                     {isLoading ? 'Loading...' : 'Start Searching'}
                 </button>
+                <p>Enter your search query to get relevant news articles</p>
             </div>
             <div>
                 <h2>Recent Prompts</h2>
                 {promptHistoryData.map((promptData, index) => (
                     <div onClick={handleSelectedPrompt(index)} style={{ cursor: 'pointer' }} key={index} className="prompt">
-                        {promptData?.prompt.slice(0,50)}...
+                        {promptData.prompt}
                     </div>
                 ))}
             </div>

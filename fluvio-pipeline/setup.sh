@@ -80,7 +80,6 @@ print_message "Setting up SDF..."
 sdf setup
 check_continue
 
-
 # Mark setup as complete
 touch "$FLAG_FILE"
 
